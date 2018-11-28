@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 
-import com.construct-play-games.cordova.plugins.GameHelper.GameHelperListener;
+import android.GameHelper.GameHelperListener;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
