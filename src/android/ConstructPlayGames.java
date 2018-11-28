@@ -646,42 +646,38 @@ public class ConstructPlayGames extends CordovaPlugin
 
 	private void getPlayerData(final CallbackContext callbackContext)
 	{
-		if (!isSignedIn())
-		{
-			callbackContext.error("Not signed in");
-			return;
-		}
+       Log.d(LOGTAG, "executeShowPlayer");
 
-		awaitTask(
-				mPlayersClient.getCurrentPlayer(),
-				t -> {
-					Player result = (Player) t.getResult();
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
 
-					try
-					{
-						JSONObject playerData = new JSONObject();
+                try {
+                    if (gameHelper.isSignedIn()) {
 
-						playerData.put("playerId", result.getPlayerId());
-						playerData.put("displayName", result.getDisplayName());
-						playerData.put("avatarImageUrl", result.getHiResImageUri());
+                        Player player = Games.Players.getCurrentPlayer(gameHelper.getApiClient());
 
-						JSONObject playerName = new JSONObject();
-						// NOTE these values don't seem to exist in this API,
-						// but for compatability I'm including them
-						playerName.put("givenName", "");
-						playerName.put("familyName", "");
-						playerData.put("name", playerName);
+                        JSONObject playerJson = new JSONObject();
+                        playerJson.put("displayName", player.getDisplayName());
+                        playerJson.put("playerId", player.getPlayerId());
+                        playerJson.put("title", player.getTitle());
+                        playerJson.put("iconImageUrl", player.getIconImageUrl());
+                        playerJson.put("hiResIconImageUrl", player.getHiResImageUrl());
 
-						callbackContext.success(playerData);
-					}
-					catch (JSONException e)
-					{
-						callbackContext.error("Failed to get player data");
-					}
-				},
-				t -> callbackContext.error("Failed to get player data")
-		);
-	}
+                        callbackContext.success(playerJson);
+
+                    } else {
+                        Log.w(LOGTAG, "executeShowPlayer: not yet signed in");
+                        callbackContext.error("executeShowPlayer: not yet signed in");
+                    }
+                }
+                catch(Exception e) {
+                    Log.w(LOGTAG, "executeShowPlayer: Error providing player data", e);
+                    callbackContext.error("executeShowPlayer: Error providing player data");
+                }
+            }
+        });
+    }
 
 	private void getHiScores(final CallbackContext callbackContext, final JSONObject options)
 	{
