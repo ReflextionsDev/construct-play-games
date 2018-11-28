@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 
+import com.construct-play-games.cordova.plugins.GameHelper.GameHelperListener;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -43,7 +44,7 @@ import static com.google.android.gms.games.leaderboard.LeaderboardVariant.TIME_S
 import static com.google.android.gms.games.leaderboard.LeaderboardVariant.TIME_SPAN_DAILY;
 import static com.google.android.gms.games.leaderboard.LeaderboardVariant.TIME_SPAN_WEEKLY;
 
-public class ConstructPlayGames extends CordovaPlugin
+public class ConstructPlayGames extends CordovaPlugin implements GameHelperListener
 {
 	// Client used to sign in with Google APIs
 	private GoogleSignInClient mGoogleSignInClient;
@@ -911,4 +912,14 @@ public class ConstructPlayGames extends CordovaPlugin
 					}
 				});
 	}
+	
+	@Override
+    public void onSignInFailed() {
+        authCallbackContext.error("SIGN IN FAILED");
+    }
+
+    @Override
+    public void onSignInSucceeded() {
+        authCallbackContext.success("SIGN IN SUCCESS");
+    }
 }
