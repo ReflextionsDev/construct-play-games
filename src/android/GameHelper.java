@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.berriart.cordova.plugins;
+package com.scirra;
 
 import java.util.ArrayList;
 

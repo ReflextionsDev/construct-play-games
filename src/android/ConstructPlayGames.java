@@ -6,7 +6,10 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 
-import android.GameHelper.GameHelperListener;
+//import android.GameHelper.GameHelperListener;
+import com.scirra.GameHelper.GameHelperListener;
+//import com.berriart.cordova.plugins.GameHelper.GameHelperListener;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
