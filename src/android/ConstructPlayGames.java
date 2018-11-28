@@ -646,7 +646,7 @@ public class ConstructPlayGames extends CordovaPlugin
 
 	private void getPlayerData(final CallbackContext callbackContext)
 	{
-       Log.d(LOGTAG, "executeShowPlayer");
+       //Log.d(LOGTAG, "executeShowPlayer");
 
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -667,12 +667,12 @@ public class ConstructPlayGames extends CordovaPlugin
                         callbackContext.success(playerJson);
 
                     } else {
-                        Log.w(LOGTAG, "executeShowPlayer: not yet signed in");
+                        //Log.w(LOGTAG, "executeShowPlayer: not yet signed in");
                         callbackContext.error("executeShowPlayer: not yet signed in");
                     }
                 }
                 catch(Exception e) {
-                    Log.w(LOGTAG, "executeShowPlayer: Error providing player data", e);
+                    //Log.w(LOGTAG, "executeShowPlayer: Error providing player data", e);
                     callbackContext.error("executeShowPlayer: Error providing player data");
                 }
             }
