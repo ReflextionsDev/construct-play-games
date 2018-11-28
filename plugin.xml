@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="construct-play-games" version="1.0.13" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>ConstructPlayGames</name>
+    <platform name="android">
+
+        <preference name="APP_ID" />
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ConstructPlayGames">
+                <param name="android-package" value="com.scirra.ConstructPlayGames"/>
+            </feature>
+        </config-file>
+
+        <config-file target="res/values/strings.xml" parent="/resources">
+            <string name="app_id">$APP_ID</string>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <meta-data
+              android:name="com.google.android.gms.games.APP_ID"
+              android:value="@string/app_id" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+        </config-file>
+        <framework src="com.google.android.gms:play-services-games:+" />
+        <framework src="com.google.android.gms:play-services-identity:+" />
+        <framework src="com.google.android.gms:play-services-auth:+" />
+
+        <source-file src="src/android/ConstructPlayGames.java" target-dir="src/com/scirra"/>
+        <source-file src="src/android/TaskCounter.java" target-dir="src/com/scirra"/>
+     </platform>
+     <js-module name="ConstructPlayGames" src="www/ConstructPlayGames.js">
+         <clobbers target="cordova.plugins.ConstructPlayGames" />
+     </js-module>
+</plugin>
